@@ -115,10 +115,10 @@ class HackerNewsFragment : Fragment() {
     fun showInfo(list:List<Articulo>){
         if (list.isNotEmpty()){
 
-            val linear = LinearLayoutManager(
+            /*val linear = LinearLayoutManager(
                 requireContext(),
                 LinearLayoutManager.VERTICAL, false
-            )
+            )*/
 
             /*val f = preferen.edit()
             f.putString(key,null)
@@ -134,7 +134,7 @@ class HackerNewsFragment : Fragment() {
                 }
             }
 
-            binding.recyclerView.layoutManager = linear
+           // binding.recyclerView.layoutManager = linear
             val hackerNewsRecyclerViewAdapter = HackerNewsRecyclerViewAdapter(requireContext(),
                 ArrayList(datosBase)
             )
@@ -142,12 +142,12 @@ class HackerNewsFragment : Fragment() {
 
 
             hackerNewsRecyclerViewAdapter.setListener(object: HackerNewsRecyclerViewAdapter.HackerListener{
-                override fun onClick(position:Int,tipo:Int) {
+                override fun onClick(articulo: Articulo,tipo:Int) {
 
 
                     if (tipo ==0 ){
-                        if (datosBase[position].story_url!=null){
-                            PageWebDialog.show(parentFragmentManager,datosBase[position].story_url)
+                        if (articulo.story_url!=null){
+                            PageWebDialog.show(parentFragmentManager,articulo.story_url)
                         }else{
                             Mensaje.showErrorDialogFragment(requireContext(),"No tiene url de historia")
                         }
@@ -157,12 +157,14 @@ class HackerNewsFragment : Fragment() {
                         if (idDatos!=null){
                             val id = idDatos.split(",")
                             val idborados = id.toMutableList()
-                            idborados.add(datosBase[position].objectID.toString())
+                            idborados.add(articulo.objectID.toString())
                             editor.putString(key,idborados.joinToString(","))
                         }else{
-                            editor.putString(key,datosBase[position].objectID.toString())
+                            editor.putString(key,articulo.objectID.toString())
                         }
+                        val position = datosBase.indexOf(articulo)
                         datosBase.removeAt(position)
+                        hackerNewsRecyclerViewAdapter.deleteData(articulo)
                         editor.apply()
                     }
 
