@@ -47,14 +47,14 @@ class HackerNewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         preferen = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        getInfo(false,"android")
 
         viewModel.getArticulos.observe(viewLifecycleOwner,{
-
 
             when(it){
                 is Resource.Loading -> {
                     Log.e("Resource.Loading","cargango")
-                    binding!!.recaragDatos.isRefreshing = false
+                    binding.recaragDatos.isRefreshing = false
                     ocultaVista(true)
                 }
 
@@ -68,18 +68,17 @@ class HackerNewsFragment : Fragment() {
 
                 is Resource.Fail -> {
                     showInfo(it.data)
-
+                    Mensaje.showErrorDialogFragment(requireContext(),"no se pudieron actualizar los datos")
                     Log.e("Resource.Fail",it.toString())
                 }
             }
         })
-        getInfo(false,"android")
         refreshData()
     }
 
     fun refreshData(){
 
-        binding!!.recaragDatos.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
+        binding.recaragDatos.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                getInfo(true,"android")
             }

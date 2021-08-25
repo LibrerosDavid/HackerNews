@@ -15,4 +15,6 @@ interface HackerNewsDAO {
 
     @Query("delete from articulo where objectID = :id")
     fun delete(id:Long)
+
+
 }

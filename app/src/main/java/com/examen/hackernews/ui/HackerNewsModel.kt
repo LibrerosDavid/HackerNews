@@ -1,12 +1,12 @@
 package com.examen.hackernews.ui
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.examen.hackernews.modelData.Page
 import com.examen.hackernews.repository.HackerNewsRepository
+import com.examen.hackernews.util.Resource
+import kotlinx.coroutines.Dispatchers
+import java.lang.Exception
 
 class HackerNewsModel @ViewModelInject constructor(
     private val hackerNewsRepository: HackerNewsRepository
