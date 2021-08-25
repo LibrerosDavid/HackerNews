@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_navigation"
+    app:startDestination="@id/hackerNewsFragment">
+
+    <fragment
+        android:id="@+id/hackerNewsFragment"
+        android:name="com.examen.hackernews.ui.HackerNewsFragment"
+        android:label="fragment_hacker_news"
+        tools:layout="@layout/fragment_hacker_news" />
+</navigation>
