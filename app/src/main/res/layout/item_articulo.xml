@@ -43,8 +43,9 @@
 
         <Button
             android:id="@+id/borra"
-            android:layout_width="30dp"
+            android:layout_width="40dp"
             android:layout_height="30dp"
+            android:background="@drawable/trash"
             android:layout_alignParentEnd="true"
             />
 

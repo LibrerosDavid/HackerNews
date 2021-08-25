@@ -10,6 +10,5 @@ interface HackerNewsService {
     @GET("search_by_date")
     fun getArticulos(
         @Query("query") query: String,
-        @Query("page") page:Int
     ): LiveData<ApiResponse<ResponseData>>
 }

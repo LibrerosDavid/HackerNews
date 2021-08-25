@@ -121,26 +121,23 @@ class HackerNewsFragment : Fragment() {
                 LinearLayoutManager.VERTICAL, false
             )
 
+            /*val f = preferen.edit()
+            f.putString(key,null)
+            f.apply()*/
 
             val infoBorrados = preferen.getString(key,null)
             val datosBase = list.toMutableList()
-
-            //hackerNewsRecyclerViewAdapter.setData(ArrayList(datosBase))
-
-/*           val hackerNewsRecyclerViewAdapter = HackerNewsRecyclerViewAdapter(ArrayList(list),requireContext(),)
-
-            var datosBase = list.toMutableList()
 
             if (infoBorrados!=null){
                 val id = infoBorrados.split(",")
                 for (datoborrado:String in id){
                     datosBase.removeIf { datoborrado.toLong() == it.objectID }
                 }
-            }*/
+            }
 
             binding.recyclerView.layoutManager = linear
             val hackerNewsRecyclerViewAdapter = HackerNewsRecyclerViewAdapter(requireContext(),
-                ArrayList(list)
+                ArrayList(datosBase)
             )
             binding.recyclerView.adapter = hackerNewsRecyclerViewAdapter
 
@@ -148,7 +145,6 @@ class HackerNewsFragment : Fragment() {
             hackerNewsRecyclerViewAdapter.setListener(object: HackerNewsRecyclerViewAdapter.HackerListener{
                 override fun onClick(position:Int,tipo:Int) {
 
-                    Log.e("position",position.toString())
 
                     if (tipo ==0 ){
                         if (datosBase[position].story_url!=null){
@@ -162,12 +158,12 @@ class HackerNewsFragment : Fragment() {
                         if (idDatos!=null){
                             val id = idDatos.split(",")
                             val idborados = id.toMutableList()
-                            idborados.add(list[position].objectID.toString())
+                            idborados.add(datosBase[position].objectID.toString())
                             editor.putString(key,idborados.joinToString(","))
                         }else{
-                            editor.putString(key,list[position].objectID.toString())
+                            editor.putString(key,datosBase[position].objectID.toString())
                         }
-
+                        datosBase.removeAt(position)
                         editor.apply()
                     }
 

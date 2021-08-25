@@ -48,7 +48,6 @@ class HackerNewsRepository @Inject constructor(
 
                 return hackerNewsService.getArticulos(
                     page.query,
-                    page.page
                 )
             }
         }.asLiveData()
